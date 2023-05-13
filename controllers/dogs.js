@@ -39,8 +39,4 @@ async function show(req, res) {
   }
 }
 
-export {
-  create,
-  index,
-  show,
-}
+export { create, index, show, }
