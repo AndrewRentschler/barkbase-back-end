@@ -52,9 +52,22 @@ async function update(req, res) {
   }
 }
 
+async function deleteBlog(req, res) {
+  try {
+    const dog = await Dog.findByIdAndDelete(req.params.dogId)
+    const profile = await Profile.findById(req.user.profile)
+    profile.dogs.remove({ _id: req.params.dogId })
+    await profile.save()
+    res.status(200).json(dog)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
-	show,
+  show,
   update,
+  deleteBlog as delete
 }
