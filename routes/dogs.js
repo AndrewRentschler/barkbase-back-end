@@ -14,6 +14,7 @@ router.get('/', checkAuth, dogsCtrl.index)
 router.get('/:dogId', checkAuth, dogsCtrl.show)
 router.put('/:dogId', checkAuth, dogsCtrl.update)
 router.delete('/:dogId', checkAuth, dogsCtrl.delete)
+router.post('/:dogId/comments', checkAuth, dogsCtrl.createComment)
 
 
 export { router }

@@ -64,10 +64,26 @@ async function deleteDog(req, res) {
   }
 }
 
+async function createComment(req, res) {
+  try {
+    req.body.author = req.user.profile
+    const dog = await Dog.findById(req.params.dogId)
+    dog.comments.push(req.body)
+    await dog.save()
+    const newComment = dog.comments[dog.comments.length - 1]
+    const profile = await Profile.findById(req.user.profile)
+    newComment.author = profile
+    res.status(201).json(newComment)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
   show,
   update,
-  deleteDog as delete
+  deleteDog as delete,
+  createComment,
 }
