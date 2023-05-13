@@ -29,7 +29,14 @@ async function index(req, res) {
   }
 }
 
-export {
-  create,
-  index,
+async function show(req, res) {
+  try {
+    const dog = await Dog.findById(req.params.dogId)
+      .populate(['owner', 'comments.author'])
+    res.status(200).json(dog)
+  } catch (error) {
+    res.status(500).json(error)
+  }
 }
+
+export { create, index, show, }
