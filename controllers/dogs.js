@@ -39,4 +39,22 @@ async function show(req, res) {
   }
 }
 
-export { create, index, show, }
+async function update(req, res) {
+  try {
+    const dog = await Dog.findByIdAndUpdate(
+      req.params.dogId,
+      req.body,
+      { new: true }
+    ).populate('owner')
+    res.status(200).json(dog)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+export {
+  create,
+  index,
+	show,
+  update,
+}

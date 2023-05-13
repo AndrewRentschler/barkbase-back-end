@@ -12,6 +12,7 @@ router.use(decodeUserFromToken)
 router.post('/', checkAuth, dogsCtrl.create)
 router.get('/', checkAuth, dogsCtrl.index)
 router.get('/:dogId', checkAuth, dogsCtrl.show)
+router.put('/:dogId', checkAuth, dogsCtrl.update)
 
 
 export { router }
