@@ -16,6 +16,6 @@ router.put('/:dogId', checkAuth, dogsCtrl.update)
 router.delete('/:dogId', checkAuth, dogsCtrl.delete)
 router.post('/:dogId/comments', checkAuth, dogsCtrl.createComment)
 router.put('/:dogId/comments/:commentId', checkAuth, dogsCtrl.updateComment)
-router.delete('/:blodId/comments/:commentId', checkAuth, dogsCtrl.deleteComment)
+router.delete('/:dogId/comments/:commentId', checkAuth, dogsCtrl.deleteComment)
 
 export { router }
