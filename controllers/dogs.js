@@ -52,7 +52,7 @@ async function update(req, res) {
   }
 }
 
-async function deleteBlog(req, res) {
+async function deleteDog(req, res) {
   try {
     const dog = await Dog.findByIdAndDelete(req.params.dogId)
     const profile = await Profile.findById(req.user.profile)
@@ -69,5 +69,5 @@ export {
   index,
   show,
   update,
-  deleteBlog as delete
+  deleteDog as delete
 }
