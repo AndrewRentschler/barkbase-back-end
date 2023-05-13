@@ -91,6 +91,17 @@ async function updateComment(req, res) {
   }
 }
 
+async function deleteComment(req, res) {
+  try {
+    const dog = await Dog.findById(req.params.dogId)
+    dog.comments.remove({ _id: req.params.commentId })
+    await dog.save()
+    res.status(200).json(dog)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
@@ -99,4 +110,5 @@ export {
   deleteDog as delete,
   createComment,
   updateComment,
+  deleteComment,
 }
