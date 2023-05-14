@@ -39,8 +39,22 @@ async function show(req, res) {
   }
 }
 
+async function update(req, res) {
+  try {
+    const report = await Report.findByIdAndUpdate(
+      req.params.reportId,
+      req.body,
+      { new: true }
+    ).populate('author')
+    res.status(200).json(report)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
   show,
+  update,
 }

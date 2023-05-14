@@ -12,6 +12,7 @@ router.use(decodeUserFromToken)
 router.post('/', checkAuth, reportsCtrl.create)
 router.get('/', checkAuth, reportsCtrl.index)
 router.get('/:reportId', checkAuth, reportsCtrl.show)
+router.put('/:reportId', checkAuth, reportsCtrl.update)
 
 
 export { router }
