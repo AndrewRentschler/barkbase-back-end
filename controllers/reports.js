@@ -29,7 +29,18 @@ async function index(req, res) {
   }
 }
 
+async function show(req, res) {
+  try {
+    const report = await Report.findById(req.params.reportId)
+      .populate(['author'])
+    res.status(200).json(report)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
+  show,
 }
