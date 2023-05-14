@@ -10,7 +10,7 @@ async function create(req, res) {
       { $push: {reports: report } },
       { new: true }
     )
-    report.author = profile
+    report.author = profile._id
     res.status(201).json(report)
   } catch (error) {
     console.log(error)
