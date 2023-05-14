@@ -39,4 +39,76 @@ async function show(req, res) {
   }
 }
 
-export { create, index, show, }
+async function update(req, res) {
+  try {
+    const dog = await Dog.findByIdAndUpdate(
+      req.params.dogId,
+      req.body,
+      { new: true }
+    ).populate('owner')
+    res.status(200).json(dog)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+async function deleteDog(req, res) {
+  try {
+    const dog = await Dog.findByIdAndDelete(req.params.dogId)
+    const profile = await Profile.findById(req.user.profile)
+    profile.dogs.remove({ _id: req.params.dogId })
+    await profile.save()
+    res.status(200).json(dog)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+async function createComment(req, res) {
+  try {
+    req.body.author = req.user.profile
+    const dog = await Dog.findById(req.params.dogId)
+    dog.comments.push(req.body)
+    await dog.save()
+    const newComment = dog.comments[dog.comments.length - 1]
+    const profile = await Profile.findById(req.user.profile)
+    newComment.author = profile
+    res.status(201).json(newComment)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+async function updateComment(req, res) {
+  try {
+    const dog = await Dog.findById(req.params.dogId)
+    const comment = dog.comments.id(req.params.commentId)
+    comment.text = req.body.text
+    await dog.save()
+    res.status(200).json(dog)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+async function deleteComment(req, res) {
+  try {
+    const dog = await Dog.findById(req.params.dogId)
+    dog.comments.remove({ _id: req.params.commentId })
+    await dog.save()
+    res.status(200).json(dog)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+export {
+  create,
+  index,
+  show,
+  update,
+  deleteDog as delete,
+  createComment,
+  updateComment,
+  deleteComment,
+}
