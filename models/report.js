@@ -42,6 +42,8 @@ const reportSchema = new Schema(
       type: String,
       enum: ['Breakfast', 'Lunch', 'Dinner', 'None'],
     },
+    author: { type: Schema.Types.ObjectId, ref: 'Profile' },
+    dog: { type: Schema.Types.ObjectId, ref: 'Dog' },
   },
   { timestamps: true }
 )
