@@ -21,7 +21,7 @@ async function create(req, res) {
 async function index(req, res) {
   try {
     const dogs = await Dog.find({})
-      .populate('owner')
+      // .populate('owner')
       .sort({ createdAt: 'desc' })
     res.status(200).json(dogs)
   } catch (error) {
