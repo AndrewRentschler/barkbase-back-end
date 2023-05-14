@@ -52,9 +52,22 @@ async function update(req, res) {
   }
 }
 
+async function deleteReport(req, res) {
+  try {
+    const report = await Report.findByIdAndDelete(req.params.reportId)
+    const profile = await Profile.findById(req.user.profile)
+    profile.reports.remove({ _id: req.params.reportId })
+    await profile.save()
+    res.status(200).json(report)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
   show,
   update,
+  deleteReport as delete,
 }
