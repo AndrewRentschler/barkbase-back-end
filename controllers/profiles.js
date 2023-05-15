@@ -30,4 +30,31 @@ async function addPhoto(req, res) {
   }
 }
 
-export { index, addPhoto }
+async function show(req, res) {
+  try {
+    const profile = await Profile.findById(req.params.profileId)
+    res.status(200).json(profile)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+async function update(req, res) {
+  try {
+    const profile = await Profile.findByIdAndUpdate(
+      req.params.profileId,
+      req.body,
+      { new: true }
+    )
+    res.status(200).json(profile)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+export { 
+  index,
+  addPhoto, 
+  show,
+  update,
+}
