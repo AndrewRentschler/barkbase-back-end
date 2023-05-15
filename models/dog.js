@@ -51,6 +51,7 @@ const dogSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Report'
     },
+    photo: String,
     comments: [commentSchema],
   },
   { timestamps: true }
