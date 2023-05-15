@@ -38,7 +38,6 @@ const dogSchema = new Schema(
     },
     present: {
       type: Boolean,
-      required: true,
     },
     food: {
       type: String,
