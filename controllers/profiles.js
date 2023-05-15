@@ -1,6 +1,5 @@
 import { Profile } from '../models/profile.js'
 import { v2 as cloudinary } from 'cloudinary'
-import { User } from '../models/user.js'
 
 async function index(req, res) {
   try {
@@ -56,9 +55,6 @@ async function update(req, res) {
 async function deleteProfile(req, res) {
   try {
     const profile = await Profile.findByIdAndDelete(req.params.profileId)
-    // const user = await User.findByIdAndDelete(req.params.userId)
-    // user.profile.remove({ _id: req.params.profileId })
-    // await profile.save()
     res.status(200).json(profile)
   } catch (error) {
     res.status(500).json(error)
