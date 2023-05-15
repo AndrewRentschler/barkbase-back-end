@@ -1,5 +1,6 @@
 import { Profile } from '../models/profile.js'
 import { v2 as cloudinary } from 'cloudinary'
+import { User } from '../models/user.js'
 
 async function index(req, res) {
   try {
@@ -30,4 +31,44 @@ async function addPhoto(req, res) {
   }
 }
 
-export { index, addPhoto }
+async function show(req, res) {
+  try {
+    const profile = await Profile.findById(req.params.profileId)
+    res.status(200).json(profile)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+async function update(req, res) {
+  try {
+    const profile = await Profile.findByIdAndUpdate(
+      req.params.profileId,
+      req.body,
+      { new: true }
+    )
+    res.status(200).json(profile)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+async function deleteProfile(req, res) {
+  try {
+    const profile = await Profile.findByIdAndDelete(req.params.profileId)
+    // const user = await User.findByIdAndDelete(req.params.userId)
+    // user.profile.remove({ _id: req.params.profileId })
+    // await profile.save()
+    res.status(200).json(profile)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+export { 
+  index,
+  addPhoto, 
+  show,
+  update,
+  deleteProfile as delete,
+}
