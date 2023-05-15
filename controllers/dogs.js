@@ -1,5 +1,6 @@
 import { Profile } from '../models/profile.js'
 import { Dog } from '../models/dog.js'
+import { v2 as cloudinary } from 'cloudinary'
 
 async function create(req, res) {
   try {
