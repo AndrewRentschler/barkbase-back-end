@@ -79,6 +79,30 @@ async function createComment(req, res) {
   }
 }
 
+async function updateComment(req, res) {
+  try {
+    const report = await Report.findById(req.params.reportId)
+    const comment = report.comments.id(req.params.commentId)
+    comment.text = req.body.text
+    await report.save()
+    res.status(200).json(report)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+async function deleteComment(req, res) {
+  try {
+    const report = await Report.findById(req.params.reportId)
+    report.comments.remove({ _id: req.params.commentId })
+    await report.save()
+    res.status(200).json(report)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+
 export {
   create,
   index,
@@ -86,4 +110,6 @@ export {
   update,
   deleteReport as delete,
   createComment,
+  updateComment,
+  deleteComment,
 }
