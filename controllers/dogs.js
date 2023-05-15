@@ -1,5 +1,6 @@
 import { Profile } from '../models/profile.js'
 import { Dog } from '../models/dog.js'
+import { v2 as cloudinary } from 'cloudinary'
 
 async function create(req, res) {
   try {
@@ -102,6 +103,25 @@ async function deleteComment(req, res) {
   }
 }
 
+async function addPhoto(req, res) {
+  try {
+    const imageFile = req.files.photo.path
+    const dog = await Dog.findById(req.params.id)
+
+    const image = await cloudinary.uploader.upload(
+      imageFile, 
+      { tags: `${req.user.email}` }
+    )
+    dog.photo = image.url
+    
+    await dog.save()
+    res.status(201).json(dog.photo)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
+}
+
 export {
   create,
   index,
@@ -111,4 +131,5 @@ export {
   createComment,
   updateComment,
   deleteComment,
+  addPhoto,
 }
