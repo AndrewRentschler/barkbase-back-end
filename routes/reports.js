@@ -14,6 +14,6 @@ router.get('/', checkAuth, reportsCtrl.index)
 router.get('/:reportId', checkAuth, reportsCtrl.show)
 router.put('/:reportId', checkAuth, reportsCtrl.update)
 router.delete('/:reportId', checkAuth, reportsCtrl.delete)
-
+router.post('/:reportId/comments', checkAuth, reportsCtrl.createComment)
 
 export { router }

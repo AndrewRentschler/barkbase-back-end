@@ -64,10 +64,26 @@ async function deleteReport(req, res) {
   }
 }
 
+async function createComment(req, res) {
+  try {
+    req.body.author = req.user.profile
+    const report = await Report.findById(req.params.reportId)
+    report.comments.push(req.body)
+    await report.save()
+    const newComment = report.comments[report.comments.length - 1]
+    const profile = await Profile.findById(req.user.profile)
+    newComment.author = profile
+    res.status(201).json(newComment)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
   show,
   update,
   deleteReport as delete,
+  createComment,
 }
