@@ -32,6 +32,11 @@ const dogSchema = new Schema(
       required: true,
       enum: ['X-Small', 'Small', 'Medium', 'Large', 'X-Large'],
     },
+    sex: {
+      type: String,
+      required: true,
+      enum: ['Male', 'Female'],
+    },
     color: {
       type: String,
       required: true,
