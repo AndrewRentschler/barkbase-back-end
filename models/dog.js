@@ -26,11 +26,18 @@ const dogSchema = new Schema(
     age: {
       type: Number,
       required: true,
+      min: 0,
+      max: 99,
     },
     size: {
       type: String,
       required: true,
       enum: ['X-Small', 'Small', 'Medium', 'Large', 'X-Large'],
+    },
+    sex: {
+      type: String,
+      required: true,
+      enum: ['Male', 'Female'],
     },
     color: {
       type: String,
