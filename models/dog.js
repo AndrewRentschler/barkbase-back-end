@@ -43,9 +43,9 @@ const dogSchema = new Schema(
       type: String,
       required: true,
     },
-    owner: {
+    dogOwner: {
       type: Schema.Types.ObjectId, 
-      ref: 'Profile' 
+      ref: 'Account' 
     },
     reports: {
       type: Schema.Types.ObjectId,
