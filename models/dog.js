@@ -26,6 +26,8 @@ const dogSchema = new Schema(
     age: {
       type: Number,
       required: true,
+      min: 0,
+      max: 99,
     },
     size: {
       type: String,
