@@ -5,6 +5,7 @@ const Schema = mongoose.Schema
 const profileSchema = new Schema({
   name: String,
   photo: String,
+  isAdmin: { Boolean, default: false },
   dogs: [{ type: Schema.Types.ObjectId, ref: 'Dog' }],
   reports: [{ type: Schema.Types.ObjectId, ref: 'Report' }],
 },{
