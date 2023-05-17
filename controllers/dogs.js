@@ -1,6 +1,6 @@
-import { Profile } from '../models/profile.js'
-import { Dog } from '../models/dog.js'
-import { v2 as cloudinary } from 'cloudinary'
+import { Profile } from "../models/profile.js"
+import { Dog } from "../models/dog.js"
+import { v2 as cloudinary } from "cloudinary"
 
 async function create(req, res) {
   try {
@@ -23,7 +23,7 @@ async function index(req, res) {
   try {
     const dogs = await Dog.find({})
       // .populate('owner')
-      .sort({ createdAt: 'desc' })
+      .sort({ createdAt: "desc" })
     res.status(200).json(dogs)
   } catch (error) {
     res.status(500).json(error)
@@ -32,8 +32,10 @@ async function index(req, res) {
 
 async function show(req, res) {
   try {
-    const dog = await Dog.findById(req.params.dogId)
-      .populate(['owner', 'comments.author'])
+    const dog = await Dog.findById(req.params.dogId).populate([
+      "owner",
+      "comments.author",
+    ])
     res.status(200).json(dog)
   } catch (error) {
     res.status(500).json(error)
@@ -42,11 +44,9 @@ async function show(req, res) {
 
 async function update(req, res) {
   try {
-    const dog = await Dog.findByIdAndUpdate(
-      req.params.dogId,
-      req.body,
-      { new: true }
-    ).populate('owner')
+    const dog = await Dog.findByIdAndUpdate(req.params.dogId, req.body, {
+      new: true,
+    }).populate("owner")
     res.status(200).json(dog)
   } catch (error) {
     res.status(500).json(error)
@@ -108,17 +108,27 @@ async function addPhoto(req, res) {
     const imageFile = req.files.photo.path
     const dog = await Dog.findById(req.params.id)
 
-    const image = await cloudinary.uploader.upload(
-      imageFile, 
-      { tags: `${req.user.email}` }
-    )
+    const image = await cloudinary.uploader.upload(imageFile, {
+      tags: `${req.user.email}`,
+    })
     dog.photo = image.url
-    
+
     await dog.save()
     res.status(201).json(dog.photo)
   } catch (err) {
     console.log(err)
     res.status(500).json(err)
+  }
+}
+
+async function deletePhoto(req, res) {
+  try {
+    const dog = await Dog.findByIdAndUpdate(req.params.id)
+    dog.photo = null
+    await dog.save()
+    res.status(200).json(dog)
+  } catch (error) {
+    res.status(500).json(error)
   }
 }
 
@@ -132,4 +142,5 @@ export {
   updateComment,
   deleteComment,
   addPhoto,
+  deletePhoto,
 }
