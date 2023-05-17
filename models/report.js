@@ -38,10 +38,15 @@ const reportSchema = new Schema(
     treat: { 
       type: Boolean,  
     },
+    mealCount: {
+      type: Number,
+      min: 0,
+      max: 6,
+    },
     feedingTime: {
       type: Number,
     },
-    meal: {
+    specialInstructions: {
       type: String,
     },
     author: { type: Schema.Types.ObjectId, ref: 'Profile' },
