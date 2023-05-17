@@ -38,9 +38,11 @@ const reportSchema = new Schema(
     treat: { 
       type: Boolean,  
     },
+    feedingTime: {
+      type: Number,
+    },
     meal: {
       type: String,
-      enum: ['Breakfast', 'Lunch', 'Dinner', 'None'],
     },
     author: { type: Schema.Types.ObjectId, ref: 'Profile' },
     dog: { type: Schema.Types.ObjectId, ref: 'Dog' },
