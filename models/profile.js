@@ -13,10 +13,6 @@ const profileSchema = new Schema({
     type: Schema.Types.ObjectId, 
     ref: 'Dog' 
   }],
-  // reports: [{ 
-  //   type: Schema.Types.ObjectId, 
-  //   ref: 'Report' 
-  // }],
   email: { 
     type: String,
   },

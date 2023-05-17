@@ -4,21 +4,20 @@ import { Dog } from "../models/dog.js"
 
 async function create(req, res) {
   try {
+    console.log(req.body)
     req.body.author = req.user.profile
-    // const report = await Report.create(req.body)
-    // const profile = await Profile.findByIdAndUpdate(
-    //   req.user.profile,
-    //   { $push: {reports: report } },
-    //   { new: true }
-    // )
-    const dog = await Dog.findById(req.params.dogId)
-    dog.reports.push(req.body)
+    req.body.dog = await Dog.findById(req.body.dogId)
+    const report = await Report.create(req.body)
+    const dog = await Dog.findByIdAndUpdate(
+      req.body.dogId,
+      { $push: { reports: report } },
+      { new: true }
+    )
     await dog.save()
-    const newReport = dog.reports[dog.reports.length - 1]
-    const profile = await Profile.findById(req.user.profile)
-    newReport.author = profile
-    // report.author = profile._id
-    res.status(201).json(newReport)
+    report.author = Profile.findById(
+      req.user.profile
+    )
+    res.status(201).json(report)
   } catch (error) {
     console.log(error)
     res.status(500).json(error)    
