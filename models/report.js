@@ -44,7 +44,7 @@ const reportSchema = new Schema(
       max: 6,
     },
     feedingTimes: {
-      type: Number,
+      type: [String],
     },
     specialInstructions: {
       type: String,
