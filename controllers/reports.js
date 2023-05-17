@@ -102,7 +102,6 @@ async function deleteComment(req, res) {
   }
 }
 
-
 export {
   create,
   index,
