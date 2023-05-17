@@ -54,10 +54,10 @@ const dogSchema = new Schema(
       type: Schema.Types.ObjectId, 
       ref: 'Profile' 
     },
-    reports: {
+    reports: [{
       type: Schema.Types.ObjectId,
       ref: 'Report'
-    },
+    }],
     photo: String,
     comments: [commentSchema],
   },
