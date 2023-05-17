@@ -63,10 +63,22 @@ async function deleteProfile(req, res) {
   }
 }
 
+async function deletePhoto(req, res) {
+  try {
+    const profile = await Profile.findByIdAndUpdate(req.params.id)
+    profile.photo = null
+    await profile.save()
+    res.status(200).json(profile)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export { 
   index, 
   addPhoto, 
   show, 
   update, 
-  deleteProfile as delete
+  deleteProfile as delete,
+  deletePhoto,
 }
