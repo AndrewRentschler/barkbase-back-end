@@ -35,6 +35,7 @@ async function show(req, res) {
     const dog = await Dog.findById(req.params.dogId).populate([
       "owner",
       "comments.author",
+      "reports"
     ])
     res.status(200).json(dog)
   } catch (error) {

@@ -19,11 +19,11 @@ const reportSchema = new Schema(
       type: Number,
       min: .5,
       max: 21,
-      required: true,
+      //required: true,
     },
     boarding: {
       type: Boolean,
-      required: true,
+      //required: true,
     },
     comments: [commentSchema],
     walk: {

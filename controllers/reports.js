@@ -7,13 +7,15 @@ async function create(req, res) {
     console.log(req.body)
     req.body.author = req.user.profile
     req.body.dog = await Dog.findById(req.body.dogId)
+    req.body.duration = Number(req.body.duration)
+    console.log(req.body, "duration converted to number");
     const report = await Report.create(req.body)
     const dog = await Dog.findByIdAndUpdate(
       req.body.dogId,
       { $push: { reports: report } },
       { new: true }
     )
-    await dog.save()
+    //await dog.save()
     report.author = Profile.findById(
       req.user.profile
     )
