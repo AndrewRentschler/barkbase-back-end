@@ -49,11 +49,15 @@ async function show(req, res) {
 
 async function update(req, res) {
   try {
+    console.log(req.params.reportId, "SHOW UPDATE REPORT");
+    //req.body.dog = await Dog.findById(req.body.dogId)
+    req.body.duration = Number(req.body.duration)
     const report = await Report.findByIdAndUpdate(
       req.params.reportId,
       req.body,
       { new: true }
-    ).populate('author')
+    )
+    //.populate('author')
     res.status(200).json(report)
   } catch (error) {
     res.status(500).json(error)
