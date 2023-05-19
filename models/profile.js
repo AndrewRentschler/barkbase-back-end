@@ -19,7 +19,6 @@ const profileSchema = new Schema({
   phoneNumber: {
     type: String,
   }
-  // userId: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 },{
   timestamps: true,
 })
