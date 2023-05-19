@@ -19,11 +19,9 @@ const reportSchema = new Schema(
       type: Number,
       min: .5,
       max: 21,
-      //required: true,
     },
     boarding: {
       type: Boolean,
-      //required: true,
     },
     comments: [commentSchema],
     walk: {

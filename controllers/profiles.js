@@ -34,8 +34,9 @@ async function show(req, res) {
     const profile = await Profile.findById(req.params.profileId)
       .populate("dogs")
     res.status(200).json(profile)
-  } catch (error) {
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 
@@ -47,20 +48,19 @@ async function update(req, res) {
       { new: true }
     )
     res.status(200).json(profile)
-  } catch (error) {
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 
 async function deleteProfile(req, res) {
   try {
     const profile = await Profile.findByIdAndDelete(req.params.profileId)
-    // .then(
-    //   (profile) => User.findByIdAndDelete(profile.userId)
-    // )
     res.status(200).json(profile)
-  } catch (error) {
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 
@@ -70,8 +70,9 @@ async function deletePhoto(req, res) {
     profile.photo = null
     await profile.save()
     res.status(200).json(profile)
-  } catch (error) {
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 

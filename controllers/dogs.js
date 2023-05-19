@@ -13,9 +13,9 @@ async function create(req, res) {
     )
     dog.owner = profile
     res.status(201).json(dog)
-  } catch (error) {
-    console.log(error)
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 
@@ -25,8 +25,9 @@ async function index(req, res) {
       .populate('owner')
       .sort({ createdAt: "desc" })
     res.status(200).json(dogs)
-  } catch (error) {
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 
@@ -38,8 +39,9 @@ async function show(req, res) {
       "reports"
     ])
     res.status(200).json(dog)
-  } catch (error) {
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 
@@ -49,8 +51,9 @@ async function update(req, res) {
       new: true,
     }).populate("owner")
     res.status(200).json(dog)
-  } catch (error) {
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 
@@ -61,8 +64,9 @@ async function deleteDog(req, res) {
     profile.dogs.remove({ _id: req.params.dogId })
     await profile.save()
     res.status(200).json(dog)
-  } catch (error) {
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 
@@ -76,8 +80,9 @@ async function createComment(req, res) {
     const profile = await Profile.findById(req.user.profile)
     newComment.author = profile
     res.status(201).json(newComment)
-  } catch (error) {
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 
@@ -88,8 +93,9 @@ async function updateComment(req, res) {
     comment.text = req.body.text
     await dog.save()
     res.status(200).json(dog)
-  } catch (error) {
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 
@@ -99,8 +105,9 @@ async function deleteComment(req, res) {
     dog.comments.remove({ _id: req.params.commentId })
     await dog.save()
     res.status(200).json(dog)
-  } catch (error) {
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 
@@ -128,8 +135,9 @@ async function deletePhoto(req, res) {
     dog.photo = null
     await dog.save()
     res.status(200).json(dog)
-  } catch (error) {
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 
