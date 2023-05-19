@@ -128,7 +128,8 @@ async function deletePhoto(req, res) {
     dog.photo = null
     await dog.save()
     res.status(200).json(dog)
-  } catch (error) {
+  } catch (err) {
+    console.log(err)
     res.status(500).json(error)
   }
 }
