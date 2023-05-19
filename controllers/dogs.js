@@ -26,6 +26,7 @@ async function index(req, res) {
       .sort({ createdAt: "desc" })
     res.status(200).json(dogs)
   } catch (err) {
+    console.log(err)
     res.status(500).json(err)
   }
 }
@@ -39,6 +40,7 @@ async function show(req, res) {
     ])
     res.status(200).json(dog)
   } catch (err) {
+    console.log(err)
     res.status(500).json(err)
   }
 }
@@ -50,6 +52,7 @@ async function update(req, res) {
     }).populate("owner")
     res.status(200).json(dog)
   } catch (err) {
+    console.log(err)
     res.status(500).json(err)
   }
 }
@@ -62,6 +65,7 @@ async function deleteDog(req, res) {
     await profile.save()
     res.status(200).json(dog)
   } catch (err) {
+    console.log(err)
     res.status(500).json(err)
   }
 }
@@ -77,6 +81,7 @@ async function createComment(req, res) {
     newComment.author = profile
     res.status(201).json(newComment)
   } catch (err) {
+    console.log(err)
     res.status(500).json(err)
   }
 }
@@ -89,6 +94,7 @@ async function updateComment(req, res) {
     await dog.save()
     res.status(200).json(dog)
   } catch (err) {
+    console.log(err)
     res.status(500).json(err)
   }
 }
@@ -100,6 +106,7 @@ async function deleteComment(req, res) {
     await dog.save()
     res.status(200).json(dog)
   } catch (err) {
+    console.log(err)
     res.status(500).json(err)
   }
 }
