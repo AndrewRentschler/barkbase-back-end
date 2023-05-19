@@ -8,7 +8,7 @@ async function create(req, res) {
     const dog = await Dog.create(req.body)
     const profile = await Profile.findByIdAndUpdate(
       req.user.profile,
-      { $push: { dogs: dog } },
+      { $push: { dogs: dog._id } },
       { new: true }
     )
     dog.owner = profile
